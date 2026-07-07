@@ -365,6 +365,10 @@ function init() {
   catalogueNavButton.addEventListener("click", () => showPage("catalogue"));
   contactNavButton.addEventListener("click", () => showPage("contact"));
 
+  document.querySelector(".brand-lockup")?.addEventListener("click", () => {
+    location.reload();
+  });
+
   document.getElementById("langToggle")?.addEventListener("click", () => {
     applyLang(state.lang === "en" ? "ar" : "en");
   });
