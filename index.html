@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pure Karma Jewellery Catalogue</title>
+    <link rel="icon" type="image/png" href="assets/pure_karma_logo.png">
+    <link rel="stylesheet" href="assets/css/styles.css">
+  </head>
+  <body>
+    <section id="privateApp">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <img src="assets/pure_karma_logo.png" alt="Pure Karma Logo" class="brand-logo">
+          <div>
+            <p class="brand-name">Pure Karma</p>
+            <p class="brand-subtitle">Jewellers</p>
+          </div>
+        </div>
+        <nav class="topnav" aria-label="Main navigation">
+          <button id="catalogueNavButton" class="nav-button active" type="button">Catalogue</button>
+          <button id="contactNavButton" class="nav-button" type="button">Contact Us</button>
+        </nav>
+      </header>
+
+      <main id="cataloguePage" class="catalogue-page">
+        <section class="catalogue-hero">
+          <h1>Gold Jewellery Catalogue</h1>
+        </section>
+
+        <section class="filter-stage" aria-label="Catalogue filters">
+          <div class="section-title">
+            <span></span>
+            <h2>Categories</h2>
+            <span></span>
+          </div>
+          <div id="categoryFilters" class="category-grid"></div>
+
+          <div id="subCategoryAnchor" class="section-title">
+            <span></span>
+            <h2>Sub Categories</h2>
+            <span></span>
+          </div>
+          <div id="gramFilters" class="gram-pills"></div>
+        </section>
+
+        <section id="productAnchor" class="catalog-area">
+          <div class="catalog-head">
+            <div>
+              <p class="eyebrow">Live stock</p>
+              <h2 id="catalogTitle">Choose a category</h2>
+            </div>
+          </div>
+          <div id="productGrid" class="product-grid" aria-live="polite"></div>
+        </section>
+      </main>
+
+      <main id="contactPage" class="contact-page" hidden>
+        <section class="contact-hero-section">
+          <h1 class="contact-brand-name">Pure Karma</h1>
+          <p class="contact-brand-sub">Jewellery LLC</p>
+          <div class="title-rule"><span></span><strong></strong><span></span></div>
+        </section>
+
+        <section class="contact-persons" id="contactPersons"></section>
+
+        <section class="contact-details-grid">
+          <article class="contact-card contact-card--wide">
+            <span>Office</span>
+            <strong id="contactOfficePhone">-</strong>
+          </article>
+          <article class="contact-card contact-card--wide">
+            <span>Address</span>
+            <strong id="contactAddress">-</strong>
+          </article>
+        </section>
+      </main>
+    </section>
+
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
