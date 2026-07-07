@@ -24,7 +24,29 @@
           <button id="contactNavButton" class="nav-button" type="button">Contact Us</button>
           <button id="langToggle" class="nav-button lang-btn" type="button">عربي</button>
         </nav>
+        <button id="hamburgerBtn" class="hamburger-btn" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
       </header>
+
+      <!-- Mobile fullscreen menu -->
+      <div id="mobileMenu" class="mobile-menu" hidden>
+        <div class="mobile-menu-header">
+          <div class="brand-lockup">
+            <img src="assets/pure_karma_logo.png" alt="Pure Karma Logo" class="brand-logo">
+            <div>
+              <p class="brand-name">Pure Karma</p>
+              <p class="brand-subtitle" id="mobBrandSubtitle">Jewellers</p>
+            </div>
+          </div>
+          <button id="closeMenuBtn" class="close-menu-btn" aria-label="Close menu">&#x2715;</button>
+        </div>
+        <nav class="mobile-nav">
+          <button id="mobCatalogueBtn" class="mob-nav-item active">Catalogue</button>
+          <button id="mobContactBtn" class="mob-nav-item">Contact Us</button>
+        </nav>
+        <button id="mobileLangToggle" class="mob-lang-btn">عربي</button>
+      </div>
 
       <main id="cataloguePage" class="catalogue-page">
         <section class="catalogue-hero">

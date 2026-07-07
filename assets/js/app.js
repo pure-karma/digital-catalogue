@@ -352,6 +352,9 @@ const categoryFilters    = document.querySelector("#categoryFilters");
 const gramFilters        = document.querySelector("#gramFilters");
 const productGrid        = document.querySelector("#productGrid");
 const catalogTitle       = document.querySelector("#catalogTitle");
+const mobileMenu         = document.querySelector("#mobileMenu");
+const mobCatalogueBtn    = document.querySelector("#mobCatalogueBtn");
+const mobContactBtn      = document.querySelector("#mobContactBtn");
 
 // ── Init ───────────────────────────────────────────────────────────────────
 function init() {
@@ -365,6 +368,24 @@ function init() {
   document.getElementById("langToggle")?.addEventListener("click", () => {
     applyLang(state.lang === "en" ? "ar" : "en");
   });
+
+  // Hamburger menu
+  document.getElementById("hamburgerBtn")?.addEventListener("click", openMobileMenu);
+  document.getElementById("closeMenuBtn")?.addEventListener("click", closeMobileMenu);
+  mobCatalogueBtn?.addEventListener("click", () => { showPage("catalogue"); closeMobileMenu(); });
+  mobContactBtn?.addEventListener("click",   () => { showPage("contact");   closeMobileMenu(); });
+  document.getElementById("mobileLangToggle")?.addEventListener("click", () => {
+    applyLang(state.lang === "en" ? "ar" : "en");
+  });
+}
+
+function openMobileMenu() {
+  if (mobileMenu) mobileMenu.hidden = false;
+  document.body.style.overflow = "hidden";
+}
+function closeMobileMenu() {
+  if (mobileMenu) mobileMenu.hidden = true;
+  document.body.style.overflow = "";
 }
 
 // ── Language switching ─────────────────────────────────────────────────────
@@ -402,6 +423,15 @@ function applyLang(lang) {
   const langBtn = document.getElementById("langToggle");
   if (langBtn) langBtn.textContent = lang === "ar" ? "EN" : "عربي";
 
+  const mobileLangBtn = document.getElementById("mobileLangToggle");
+  if (mobileLangBtn) mobileLangBtn.textContent = lang === "ar" ? "EN" : "عربي";
+
+  const mobBrandSub = document.getElementById("mobBrandSubtitle");
+  if (mobBrandSub) mobBrandSub.textContent = t("brandSubtitle");
+
+  mobCatalogueBtn && (mobCatalogueBtn.textContent = t("catalogNav"));
+  mobContactBtn   && (mobContactBtn.textContent   = t("contactNav"));
+
   // Re-render dynamic sections
   renderFilters();
   renderProducts();
@@ -415,6 +445,8 @@ function showPage(page) {
   contactPage.hidden = isCatalogue;
   catalogueNavButton.classList.toggle("active", isCatalogue);
   contactNavButton.classList.toggle("active", !isCatalogue);
+  mobCatalogueBtn?.classList.toggle("active", isCatalogue);
+  mobContactBtn?.classList.toggle("active", !isCatalogue);
 }
 
 // ── Contact ────────────────────────────────────────────────────────────────
