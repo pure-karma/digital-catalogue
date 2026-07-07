@@ -517,8 +517,33 @@ h2, h3, p { margin: 0; }
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 14px;
-    gap: 10px;
+    padding: 10px 14px;
+    gap: 8px;
+  }
+  /* pill tab switcher on small screens */
+  .topnav {
+    background: rgba(168,117,8,.08);
+    border: 1px solid rgba(168,117,8,.25);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+    flex-wrap: nowrap;
+  }
+  .nav-button {
+    padding: 7px 13px;
+    font-size: 10px;
+    letter-spacing: .07em;
+    border-radius: 999px;
+    border: none;
+  }
+  .nav-button.active {
+    background: var(--gold);
+    color: #fff;
+    border: none;
+  }
+  .nav-button:not(.active):hover {
+    background: rgba(168,117,8,.12);
+    border: none;
   }
   .brand-logo  { height: 48px; }
   .brand-name  { font-size: 18px; letter-spacing: .06em; }
