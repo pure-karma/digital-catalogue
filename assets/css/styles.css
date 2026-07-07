@@ -514,14 +514,12 @@ h2, h3, p { margin: 0; }
 @media (max-width: 599px) {
   /* Topbar stacks */
   .topbar {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    padding: 14px 14px;
+    justify-content: space-between;
+    padding: 12px 14px;
     gap: 10px;
   }
-  .brand-lockup { justify-content: center; }
-  .topnav { justify-content: center; }
   .brand-logo  { height: 48px; }
   .brand-name  { font-size: 18px; letter-spacing: .06em; }
   .brand-subtitle { font-size: 9px; letter-spacing: .2em; }
