@@ -8,6 +8,70 @@ const CONTACT = {
   address: "Pure Karma Jewellery LLC, Office No. 405, Al Buteen Building 2, Near Gate 1, Gold Souk, Deira, Dubai"
 };
 
+// ── Translations ───────────────────────────────────────────────────────────
+const TRANSLATIONS = {
+  en: {
+    heroTitle:           "Gold Jewellery Catalogue",
+    categories:          "Categories",
+    subCategories:       "Sub Categories",
+    catalogNav:          "Catalogue",
+    contactNav:          "Contact Us",
+    brandSubtitle:       "Jewellers",
+    contactBrandSub:     "Jewellery LLC",
+    selectCategoryFirst: "Select a category first.",
+    noProducts:          "No products match these filters.",
+    eyebrow:             "Live stock",
+    contactLabel:        "Contact",
+    officeLabel:         "Office",
+    addressLabel:        "Address",
+    catNames: {
+      "Rings":               "Rings",
+      "Earrings":            "Earrings",
+      "Necklaces":           "Necklaces",
+      "Bangles & Bracelets": "Bangles & Bracelets",
+      "Pendants":            "Pendants",
+      "Chains":              "Chains",
+      "Mangalsutras":        "Mangalsutras",
+      "Nose Pins":           "Nose Pins",
+      "Anklets":             "Anklets",
+    },
+    gramNames: { "Short": "Short", "Medium": "Medium", "Long": "Long" },
+  },
+  ar: {
+    heroTitle:           "كتالوج المجوهرات الذهبية",
+    categories:          "الفئات",
+    subCategories:       "الفئات الفرعية",
+    catalogNav:          "الكتالوج",
+    contactNav:          "اتصل بنا",
+    brandSubtitle:       "صائغو المجوهرات",
+    contactBrandSub:     "مجوهرات ذ.م.م",
+    selectCategoryFirst: "اختر فئة أولاً.",
+    noProducts:          "لا توجد منتجات تطابق هذه الفلاتر.",
+    eyebrow:             "المخزون المتاح",
+    contactLabel:        "تواصل",
+    officeLabel:         "المكتب",
+    addressLabel:        "العنوان",
+    catNames: {
+      "Rings":               "خواتم",
+      "Earrings":            "أقراط",
+      "Necklaces":           "قلادات",
+      "Bangles & Bracelets": "أساور",
+      "Pendants":            "قلائد",
+      "Chains":              "سلاسل",
+      "Mangalsutras":        "مانغالسوترا",
+      "Nose Pins":           "دبابيس أنف",
+      "Anklets":             "خلاخيل",
+    },
+    gramNames: { "Short": "قصير", "Medium": "متوسط", "Long": "طويل" },
+  },
+};
+
+function t(key) {
+  return TRANSLATIONS[state.lang]?.[key] ?? TRANSLATIONS.en[key] ?? key;
+}
+function tCat(name) { return TRANSLATIONS[state.lang]?.catNames?.[name] ?? name; }
+function tGram(name) { return TRANSLATIONS[state.lang]?.gramNames?.[name] ?? name; }
+
 // ── Catalogue data (ported from PHP catalog.php) ──────────────────────────
 const CATEGORIES = [
   { name: "Rings",              tone: 34,  grams: ["Short", "Medium"],        styles: ["Lotus Crown", "Royal Band", "Halo Bloom", "Temple Curve", "Classic Solitaire", "Pearl Studded"] },
@@ -276,6 +340,7 @@ const state = {
   products: buildCatalog(),
   activeCategory: "",
   activeGram: "",
+  lang: "en",
 };
 
 // ── DOM refs ───────────────────────────────────────────────────────────────
@@ -296,6 +361,51 @@ function init() {
 
   catalogueNavButton.addEventListener("click", () => showPage("catalogue"));
   contactNavButton.addEventListener("click", () => showPage("contact"));
+
+  document.getElementById("langToggle")?.addEventListener("click", () => {
+    applyLang(state.lang === "en" ? "ar" : "en");
+  });
+}
+
+// ── Language switching ─────────────────────────────────────────────────────
+function applyLang(lang) {
+  state.lang = lang;
+  document.documentElement.dir  = lang === "ar" ? "rtl" : "ltr";
+  document.documentElement.lang = lang;
+
+  // Static HTML text
+  const heroH1 = document.querySelector(".catalogue-hero h1");
+  if (heroH1) heroH1.textContent = t("heroTitle");
+
+  const sectionTitles = document.querySelectorAll(".section-title h2");
+  if (sectionTitles[0]) sectionTitles[0].textContent = t("categories");
+  if (sectionTitles[1]) sectionTitles[1].textContent = t("subCategories");
+
+  const brandSub = document.querySelector(".brand-subtitle");
+  if (brandSub) brandSub.textContent = t("brandSubtitle");
+
+  const contactBrandSub = document.querySelector(".contact-brand-sub");
+  if (contactBrandSub) contactBrandSub.textContent = t("contactBrandSub");
+
+  const eyebrowEl = document.querySelector(".eyebrow");
+  if (eyebrowEl) eyebrowEl.textContent = t("eyebrow");
+
+  const officeLabel = document.getElementById("officeLabelEl");
+  if (officeLabel) officeLabel.textContent = t("officeLabel");
+
+  const addressLabel = document.getElementById("addressLabelEl");
+  if (addressLabel) addressLabel.textContent = t("addressLabel");
+
+  catalogueNavButton.textContent = t("catalogNav");
+  contactNavButton.textContent   = t("contactNav");
+
+  const langBtn = document.getElementById("langToggle");
+  if (langBtn) langBtn.textContent = lang === "ar" ? "EN" : "عربي";
+
+  // Re-render dynamic sections
+  renderFilters();
+  renderProducts();
+  renderContact();
 }
 
 // ── Page switching ─────────────────────────────────────────────────────────
@@ -313,7 +423,7 @@ function renderContact() {
   if (persons) {
     persons.innerHTML = CONTACT.persons.map(p => `
       <article class="contact-card contact-person-card">
-        <span>Contact</span>
+        <span>${t("contactLabel")}</span>
         <strong>${escapeHtml(p.name)}</strong>
         <a class="contact-phone-link" href="tel:${escapeHtml(p.phone)}">${escapeHtml(p.phone)}</a>
       </article>
@@ -334,13 +444,13 @@ function renderFilters() {
 
   categoryFilters.innerHTML = categories.map(cat => `
     <button class="category-chip" type="button" data-value="${escapeHtml(cat)}" aria-pressed="${state.activeCategory === cat}">
-      <span class="category-icon"><span class="category-label-inner">${escapeHtml(cat)}</span></span>
+      <span class="category-icon"><span class="category-label-inner">${escapeHtml(tCat(cat))}</span></span>
     </button>
   `).join("");
 
   gramFilters.innerHTML = grams.length
-    ? grams.map(gram => `<button class="gram-chip" type="button" data-value="${escapeHtml(gram)}" aria-pressed="${state.activeGram === gram}">${escapeHtml(gram)}</button>`).join("")
-    : `<div class="empty-filter-note">Select a category first.</div>`;
+    ? grams.map(gram => `<button class="gram-chip" type="button" data-value="${escapeHtml(gram)}" aria-pressed="${state.activeGram === gram}">${escapeHtml(tGram(gram))}</button>`).join("")
+    : `<div class="empty-filter-note">${t("selectCategoryFirst")}</div>`;
 
   categoryFilters.querySelectorAll("button").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -374,10 +484,10 @@ function renderProducts() {
   if (catalogArea) catalogArea.hidden = false;
 
   const products = state.products.filter(p => p.category === state.activeCategory && p.grams === state.activeGram);
-  catalogTitle.textContent = `${state.activeCategory} | ${state.activeGram}`;
+  catalogTitle.textContent = `${tCat(state.activeCategory)} | ${tGram(state.activeGram)}`;
 
   if (products.length === 0) {
-    productGrid.innerHTML = `<div class="empty-state">No products match these filters.</div>`;
+    productGrid.innerHTML = `<div class="empty-state">${t("noProducts")}</div>`;
     return;
   }
 
@@ -390,7 +500,7 @@ function renderProducts() {
           <span>${escapeHtml(product.imageTag)}</span>
         </div>
         <h3>${escapeHtml(product.name)}</h3>
-        <div class="grams">${escapeHtml(product.grams)}</div>
+        <div class="grams">${escapeHtml(tGram(product.grams))}</div>
       </div>
     </article>
   `).join("");
@@ -413,3 +523,14 @@ function escapeHtml(value) {
 }
 
 init();
+
+// ── Image / content protection ─────────────────────────────────────────────
+document.addEventListener("contextmenu", e => e.preventDefault());
+document.addEventListener("dragstart", e => {
+  if (e.target.tagName === "IMG" || e.target.closest("svg, .product-img, .category-icon")) {
+    e.preventDefault();
+  }
+});
+document.addEventListener("selectstart", e => {
+  if (e.target.closest(".product-img, .category-icon")) e.preventDefault();
+});

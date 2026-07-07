@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pure Karma Jewellery Catalogue</title>
     <link rel="icon" type="image/png" href="assets/pure_karma_logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
   </head>
   <body>
@@ -20,6 +22,7 @@
         <nav class="topnav" aria-label="Main navigation">
           <button id="catalogueNavButton" class="nav-button active" type="button">Catalogue</button>
           <button id="contactNavButton" class="nav-button" type="button">Contact Us</button>
+          <button id="langToggle" class="nav-button lang-btn" type="button">عربي</button>
         </nav>
       </header>
 
@@ -66,11 +69,11 @@
 
         <section class="contact-details-grid">
           <article class="contact-card contact-card--wide">
-            <span>Office</span>
+            <span id="officeLabelEl">Office</span>
             <strong id="contactOfficePhone">-</strong>
           </article>
           <article class="contact-card contact-card--wide">
-            <span>Address</span>
+            <span id="addressLabelEl">Address</span>
             <strong id="contactAddress">-</strong>
           </article>
         </section>

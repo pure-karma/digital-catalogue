@@ -629,3 +629,49 @@ h2, h3, p { margin: 0; }
   .product-card { animation: none; }
   * { transition-duration: .01ms !important; }
 }
+
+/* ── Language toggle button ───────────────────────────────────────────────── */
+.lang-btn {
+  border: 1.5px solid var(--gold) !important;
+  font-family: 'Noto Sans Arabic', Arial, sans-serif;
+  letter-spacing: 0;
+  min-width: 52px;
+}
+
+/* ── Arabic / RTL overrides ──────────────────────────────────────────────── */
+[dir="rtl"] {
+  font-family: 'Noto Sans Arabic', Arial, sans-serif;
+}
+[dir="rtl"] .brand-name,
+[dir="rtl"] .brand-subtitle,
+[dir="rtl"] .catalogue-hero h1,
+[dir="rtl"] .section-title h2,
+[dir="rtl"] .nav-button,
+[dir="rtl"] .gram-chip,
+[dir="rtl"] .category-label-inner,
+[dir="rtl"] .product-body h3,
+[dir="rtl"] .contact-brand-name,
+[dir="rtl"] .contact-card span,
+[dir="rtl"] .contact-card strong {
+  font-family: 'Noto Sans Arabic', Arial, sans-serif;
+  letter-spacing: 0;
+}
+[dir="rtl"] .section-title { direction: rtl; }
+[dir="rtl"] .topnav { direction: ltr; } /* keep pill order consistent */
+
+/* ── Image / SVG protection ──────────────────────────────────────────────── */
+img, .product-img svg, .brand-logo {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+}
+.product-img {
+  position: relative;
+}
+.product-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
