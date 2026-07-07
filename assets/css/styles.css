@@ -475,6 +475,28 @@ h2, h3, p { margin: 0; }
 #subCategoryAnchor,
 #productAnchor { scroll-margin-top: 88px; }
 
+/* ── Hamburger button (hidden by default, shown on mobile via media query) ── */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  flex-shrink: 0;
+}
+.hamburger-btn span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
 /* ── Responsive ──────────────────────────────────────────────────────────── */
 
 /* Large desktop: 1280px+ — already handled by base styles */
@@ -608,27 +630,6 @@ h2, h3, p { margin: 0; }
   * { transition-duration: .01ms !important; }
 }
 
-/* ── Hamburger button ────────────────────────────────────────────────────── */
-.hamburger-btn {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  width: 40px;
-  height: 40px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 6px;
-  flex-shrink: 0;
-}
-.hamburger-btn span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: var(--gold);
-  border-radius: 2px;
-}
 
 /* ── Mobile fullscreen menu ──────────────────────────────────────────────── */
 .mobile-menu {
