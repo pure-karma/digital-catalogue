@@ -521,6 +521,7 @@ h2, h3, p { margin: 0; }
     gap: 8px;
   }
   .topnav { display: none; }
+  .hamburger-btn { display: flex; }
   .brand-logo  { height: 48px; }
   .brand-name  { font-size: 18px; letter-spacing: .06em; }
   .brand-subtitle { font-size: 9px; letter-spacing: .2em; }
@@ -606,14 +607,9 @@ h2, h3, p { margin: 0; }
   * { transition-duration: .01ms !important; }
 }
 
-/* Hide hamburger on tablet/desktop */
-@media (min-width: 600px) {
-  .hamburger-btn { display: none; }
-}
-
 /* ── Hamburger button ────────────────────────────────────────────────────── */
 .hamburger-btn {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
